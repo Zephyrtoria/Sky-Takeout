@@ -97,6 +97,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.insertOne(employee);
     }
 
+    /**
+     * 分页查询员工账号
+     *
+     * @param employeePageQueryDTO
+     * @return
+     */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         // 直接使用 select * from employee limit (page-1)*pageSize, page*pageSize
@@ -108,6 +114,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records = page.getResult();
 
         return new PageResult(total, records);
+    }
+
+    /**
+     * 启用、禁用员工账号
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void changeStatus(int status, long id) {
+        // update employee set status = ? where id = ?
+        // 传入一个实体类，从而实现update的复用
+        Employee employee = Employee.builder().status(status).id(id).build();
+        employeeMapper.update(employee);
     }
 
 }
