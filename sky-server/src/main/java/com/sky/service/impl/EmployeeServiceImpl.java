@@ -130,4 +130,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+    @Override
+    public Employee queryById(Long id) {
+        return employeeMapper.queryById(id);
+    }
+
 }
