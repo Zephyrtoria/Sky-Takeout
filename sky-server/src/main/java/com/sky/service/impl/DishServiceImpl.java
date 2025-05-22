@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.sky.constant.MessageConstant.DISH_BE_RELATED_BY_SETMEAL;
@@ -106,5 +107,56 @@ public class DishServiceImpl implements DishService {
 
         // 3. 删除口味表中的口味数据
         flavorMapper.deleteBatchByDishIds(ids);
+    }
+
+    /**
+     * 根据id查询菜品，同时返回关联的口味数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO queryById(Long id) {
+        // 1. 查询菜品数据
+        Dish dish = dishMapper.getById(id);
+
+        // 2. 查询口味数据
+        List<DishFlavor> flavors = flavorMapper.getByDishId(id);
+
+        // 3. 封装成VO对象返回
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(flavors);
+
+        return dishVO;
+    }
+
+    /**
+     * 修改菜品信息和对应的口味数据
+     * @param dishDTO
+     */
+    @Override
+    public void updateWithFlavor(DishDTO dishDTO) {
+        // 1. 修改菜品信息
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+        dishMapper.update(dish);
+
+        // 2. 修改口味信息：先删除原有口味，才插入新数据
+        // 2.1 删除口味表中的数据
+        Long dishId = dish.getId();
+        ArrayList<Long> ids = new ArrayList<>();
+        ids.add(dishId);
+        flavorMapper.deleteBatchByDishIds(ids);
+
+        // 2.2 向口味表中插入数据
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        // 判断口味集合是否存在
+        if (flavors != null && !flavors.isEmpty()) {
+            flavors.forEach(flavor -> flavor.setDishId(dishId));
+            // 批量插入
+            flavorMapper.insertBatch(flavors);
+        }
+
     }
 }
