@@ -25,6 +25,7 @@ import static com.sky.constant.AutoFillConstant.*;
 @Component
 @Slf4j
 // 切面类：切入点 + 通知
+// 注意该AOP对于insertBatch无法起效
 public class AutoFillAspect {
     /*
      * 切入点
