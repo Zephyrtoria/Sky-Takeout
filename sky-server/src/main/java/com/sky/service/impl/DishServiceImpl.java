@@ -42,6 +42,9 @@ public class DishServiceImpl implements DishService {
     @Resource
     private SetmealDishMapper setmealDishMapper;
 
+    @Resource
+    private SetmealMapper setmealMapper;
+
 
     @Override
     // 出现对于多张数据表的操作，要开启事务操作来保证原子性
@@ -184,7 +187,7 @@ public class DishServiceImpl implements DishService {
             if (setmealIds != null && !setmealIds.isEmpty()) {
                 for (Long setmealId : setmealIds) {
                     Setmeal setmeal = Setmeal.builder().id(setmealId).status(DISABLE).build();
-                    setmealDishMapper.update(setmeal);
+                    setmealMapper.update(setmeal);
                 }
             }
         }

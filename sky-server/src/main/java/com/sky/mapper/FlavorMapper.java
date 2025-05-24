@@ -14,7 +14,6 @@ public interface FlavorMapper {
      *
      * @param flavors
      */
-    @AutoFill(OperationType.INSERT)
     void insertBatch(List<DishFlavor> flavors);
 
     /**
