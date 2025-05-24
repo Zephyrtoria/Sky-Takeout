@@ -1,4 +1,4 @@
-package com.sky.service.impl;
+package com.sky.service.impl.admin;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -9,11 +9,11 @@ import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.exception.SetmealEnableFailedException;
-import com.sky.mapper.DishMapper;
-import com.sky.mapper.SetmealDishMapper;
-import com.sky.mapper.SetmealMapper;
+import com.sky.mapper.admin.DishMapper;
+import com.sky.mapper.admin.SetmealDishMapper;
+import com.sky.mapper.admin.SetmealMapper;
 import com.sky.result.PageResult;
-import com.sky.service.SetmealService;
+import com.sky.service.admin.SetmealService;
 import com.sky.vo.SetmealVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

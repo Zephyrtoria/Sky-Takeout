@@ -1,4 +1,4 @@
-package com.sky.mapper;
+package com.sky.mapper.admin;
 
 import com.sky.entity.SetmealDish;
 import org.apache.ibatis.annotations.Mapper;

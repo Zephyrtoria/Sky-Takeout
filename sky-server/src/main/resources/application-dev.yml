@@ -7,4 +7,21 @@ sky:
     username: root
     password: 123456
 
+  alioss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    access-key-id: LTAI5tFyV94bZ5iWShVUZeTw
+    access-key-secret: evkZRFcM0j9qAJZtrwpTqwkDfDX789
+    bucket-name: zephyrtoria-sky-takeout
+
+  redis:
+    host: 172.30.138.31
+    port: 6379
+    password: 123456
+    database: 1
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
 
